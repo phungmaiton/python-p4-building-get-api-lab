@@ -53,9 +53,8 @@ def baked_goods_by_price():
 @app.route("/baked_goods/most_expensive")
 def most_expensive_baked_good():
     baked_goods = [baked_good.to_dict() for baked_good in BakedGood.query.all()]
-    sorted_baked_goods = sorted(baked_goods, key=lambda x: x["price"], reverse=True)
-    most_expensive_good = sorted_baked_goods[0]
-    response = make_response(most_expensive_good, 200)
+    most_expensive = sorted(baked_goods, key=lambda x: x["price"], reverse=True)[0]
+    response = make_response(most_expensive, 200)
     response.headers["Content-Type"] = "application/json"
     return response
 
